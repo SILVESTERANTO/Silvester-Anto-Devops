@@ -1,0 +1,271 @@
+git --version<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silvester India Tours — Home</title>
+  <style>
+    :root {
+      --primary: #0077b6;
+      --secondary: #00b4d8;
+      --accent: #90e0ef;
+      --bg: #f5f9ff;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --radius: 14px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text); }
+
+    /* Navbar */
+    header {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: var(--white);
+      padding: 16px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: var(--white);
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://cdn.pixabay.com/photo/2017/08/06/09/53/beach-2592595_1280.jpg') no-repeat center center/cover;
+      color: var(--red);
+      text-align: center;
+      padding: 130px 10%;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .hero button {
+      background: var(--secondary);
+      border: none;
+      padding: 14px 30px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--white);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .hero button:hover {
+      background: var(--primary);
+    }
+
+    /* Section */
+    .section {
+      padding: 60px 8%;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    /* Destination Cards */
+    .destinations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      margin: 15px 0 5px;
+      color: var(--primary);
+    }
+
+    .card p {
+      color: var(--muted);
+      padding: 0 15px 20px;
+      font-size: 0.95rem;
+    }
+
+    /* AI Travel Assistant Section */
+    .assistant {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 50px 20px;
+      margin: 60px auto;
+      max-width: 1000px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    .assistant img {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px;
+      border: 4px solid var(--white);
+    }
+
+    .assistant-text {
+      max-width: 500px;
+      margin: 20px;
+      text-align: left;
+    }
+
+    .assistant-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .assistant-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .assistant-text button {
+      background: var(--white);
+      color: var(--primary);
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .assistant-text button:hover {
+      background: #e0f7ff;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary);
+      color: var(--white);
+      text-align: center;
+      padding: 25px 10%;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">🌏 Silvester India Tours</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="payment.html">Payment</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Discover the Beauty of India</h1>
+    <p>Explore breathtaking destinations, rich culture, and unforgettable experiences.</p>
+    <button onclick="window.location.href='login.html'">Plan Your Trip</button>
+  </section>
+
+  <section class="section">
+    <h2>Popular Destinations</h2>
+    <div class="destinations">
+      <div class="card">
+        <img src="IMG/download.jpg" alt="Taj Mahal">
+        <h3>Agra</h3>
+        <p>Visit the world-famous Taj Mahal — a symbol of love and architectural wonder.</p>
+      </div>
+      <div class="card">
+        <img src="IMG/images.jpg" alt="Hampi">
+        <h3>Hampi</h3>
+        <p>Explore ancient ruins, temples, and the scenic beauty of Hampi.</p>
+      </div>
+      <div class="card">
+        <img src="IMG/download (1).jpg" alt="Kerala">
+        <h3>Kerala</h3>
+        <p>Experience tranquil backwaters, lush greenery, and unique culture of God’s Own Country.</p>
+      </div>
+      <div class="card">
+        <img src="IMG/download (2).jpg" alt="Himalayas">
+        <h3>Himalayas</h3>
+        <p>Adventure seekers can trek through the majestic mountain ranges and scenic valleys.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Travel Assistant Section -->
+  <section class="assistant">
+    <img src="IMG/Gemini_Generated_Image_qbtnf7qbtnf7qbtn.png" alt="AI Travel Assistant">
+    <div class="assistant-text">
+      <h3>Meet Your AI Travel Assistant 🤖</h3>
+      <p>Hi, I’m <strong>ChatGPT</strong> — your virtual travel planner! I can help you find the best destinations, plan itineraries, and even estimate your travel budget instantly.</p>
+      <button onclick="alert('Chat feature coming soon!')">💬 Chat Now</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>📞 Contact us: <a href="mailto:support@incredibleindia.com">support@incredibleindia.com</a></p>
+    <p>© 2025 Incredible India Tours. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
