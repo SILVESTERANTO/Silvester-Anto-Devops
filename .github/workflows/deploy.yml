@@ -27,15 +27,19 @@ jobs:
           docker build -t silvesteranto/silvester-website:latest .
           docker push silvesteranto/silvester-website:latest
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v3
+- name: Setup kubeconfig
+  env:
+    KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+  run: |
+    mkdir -p ~/.kube
+    echo "$KUBE_CONFIG_DATA" > ~/.kube/config
+    chmod 600 ~/.kube/config
+    echo "✅ Kubeconfig written"
 
-      - name: Initialize Terraform
-        working-directory: ./iac
-        run: terraform init
+- name: Terraform Init
+  working-directory: ./iac
+  run: terraform init
 
-      - name: Apply Terraform
-        working-directory: ./iac
-        env:
-          KUBE_CONFIG_PATH: ${{ secrets.KUBE_CONFIG }}
-        run: terraform apply -auto-approve -lock=false
+- name: Terraform Apply
+  working-directory: ./iac
+  run: terraform apply -auto-approve -lock=false
