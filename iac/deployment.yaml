@@ -1,7 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: silvester-ns
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: silvester-deploy
+  namespace: silvester-ns
+  labels:
+    app: silvester-web
 spec:
   replicas: 2
   selector:
@@ -14,7 +22,21 @@ spec:
     spec:
       containers:
         - name: silvester-container
-          image: silvester-website
+          image: silvesteranto/silvester-website:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: silvester-service
+  namespace: silvester-ns
+spec:
+  selector:
+    app: silvester-web
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30007
+  type: NodePort

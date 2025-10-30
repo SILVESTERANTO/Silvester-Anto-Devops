@@ -2,52 +2,48 @@ terraform {
   required_providers {
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.30.0"
+      version = ">= 2.20.0"
     }
   }
+  required_version = ">= 1.0"
 }
 
 provider "kubernetes" {
-  config_path = "~/.kube/config"
+  # Uses KUBE_CONFIG passed from Minikube in GitHub Actions
+  config_path = pathexpand("~/.kube/config")
 }
 
-# Create Namespace
-resource "kubernetes_namespace" "silvester" {
+# -----------------------------
+# Kubernetes Deployment
+# -----------------------------
+resource "kubernetes_deployment" "silvester_deploy" {
   metadata {
-    name = "silvester-ns"
-  }
-}
-
-# Deploy Application
-resource "kubernetes_deployment" "silvester_app" {
-  metadata {
-    name      = "silvester-deploy"
-    namespace = kubernetes_namespace.silvester.metadata[0].name
+    name = "silvester-deploy"
     labels = {
-      app = "silvester-website"
+      app = "silvester-web"
     }
   }
 
   spec {
     replicas = 2
-
     selector {
       match_labels = {
-        app = "silvester-website"
+        app = "silvester-web"
       }
     }
 
     template {
       metadata {
         labels = {
-          app = "silvester-website"
+          app = "silvester-web"
         }
       }
 
       spec {
         container {
-          name  = "silvester-website"
-          image = "silvesteranto/silvester-website:latest"
+          name  = "silvester-container"
+          image = var.docker_image
+          image_pull_policy = "Always"
 
           port {
             container_port = 80
@@ -58,16 +54,19 @@ resource "kubernetes_deployment" "silvester_app" {
   }
 }
 
-# Service
+# -----------------------------
+# Kubernetes Service
+# -----------------------------
 resource "kubernetes_service" "silvester_service" {
   metadata {
-    name      = "silvester-service"
-    namespace = kubernetes_namespace.silvester.metadata[0].name
+    name = "silvester-service"
   }
 
   spec {
+    type = "NodePort"
+
     selector = {
-      app = kubernetes_deployment.silvester_app.metadata[0].labels.app
+      app = "silvester-web"
     }
 
     port {
@@ -75,7 +74,13 @@ resource "kubernetes_service" "silvester_service" {
       target_port = 80
       node_port   = 30007
     }
-
-    type = "NodePort"
   }
+}
+
+# -----------------------------
+# Variable for Docker image
+# -----------------------------
+variable "docker_image" {
+  description = "Docker image to deploy"
+  type        = string
 }
